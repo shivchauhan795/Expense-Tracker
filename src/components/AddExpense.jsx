@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,8 +6,7 @@ import { ItemsContext } from '../context/context';
 
 const AddExpense = () => {
     const [form, setForm] = useState({ name: '', price: '', category: '' })
-    const [formdata, setFormdata] = useState([])
-
+    const { formdata, setFormdata } = useContext(ItemsContext)
     useEffect(() => {
         let expenses = localStorage.getItem("expenses")
         if (expenses) {
@@ -51,9 +50,7 @@ const AddExpense = () => {
     }
     return (
         <>
-            <ItemsContext.Provider value={{formdata, setFormdata}}>
-
-
+            <ItemsContext.Provider value={{ formdata, setFormdata }}>
                 <ToastContainer
                     position="top-right"
                     autoClose={2000}
