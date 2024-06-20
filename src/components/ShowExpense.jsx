@@ -17,7 +17,7 @@ const ShowExpense = () => {
 
 
 
-    console.log(displayedData)
+    // console.log(displayedData)
 
     const handleFilter = (e) => {
         const value = e.target.value
@@ -82,43 +82,48 @@ const ShowExpense = () => {
                     </select>
                 </div>
 
-                <table className='flex flex-col justify-center items-center'>
-                    <thead>
-                        <tr className='flex gap-24'>
-                            <th className='w-1/3 text-center'>Item</th>
-                            <th className='w-1/3 text-center'>Price</th>
-                            <th className='w-1/3 text-center'>Category</th>
-                            <th className='w-1/3 text-center'>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {displayedData && displayedData.map((item, index) => (
-                            <tr key={index} className='flex  gap-24'>
-                                <td className='w-1/3 text-center -ml-7-'>{item.name}</td>
-                                <td className='w-1/3 text-center pr-7'>{item.price}</td>
-                                <td className='w-1/3 text-center pr-3'>{item.category}</td>
-
-
-                                <td className='w-1/3 text-center pr-3 cursor-pointer' onClick={() => { editData(item.id) }}>
-                                    <lord-icon
-                                        style={{ "width": "25px", "height": "25px", "paddingTop": "6px", "paddingLeft": "5px" }}
-                                        src="https://cdn.lordicon.com/gwlusjdu.json"
-                                        trigger="hover" >
-                                    </lord-icon>
-                                </td>
-                                <td className='w-1/3 text-center pr-3 cursor-pointer' onClick={() => { deleteData(item.id) }}>
-                                    <lord-icon
-                                        style={{ "width": "25px", "height": "25px", "paddingTop": "6px", "paddingLeft": "5px" }}
-                                        src="https://cdn.lordicon.com/skkahier.json"
-                                        trigger="hover" >
-                                    </lord-icon>
-                                </td>
-
-
+                {displayedData.length === 0 ? (
+                    <div className='m-5'>No data to display</div>
+                ) : (
+                    <table className='flex flex-col justify-center items-center'>
+                        <thead>
+                            <tr className='flex gap-24'>
+                                <th className='w-1/3 text-center'>Item</th>
+                                <th className='w-1/3 text-center'>Price</th>
+                                <th className='w-1/3 text-center'>Category</th>
+                                <th className='w-1/3 text-center'>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+
+                            {displayedData && displayedData.map((item, index) => (
+                                <tr key={index} className='flex  gap-24'>
+                                    <td className='w-1/3 text-center -ml-7-'>{item.name}</td>
+                                    <td className='w-1/3 text-center pr-7'>{item.price}</td>
+                                    <td className='w-1/3 text-center pr-3'>{item.category}</td>
+
+
+                                    <td className='w-1/3 text-center pr-3 cursor-pointer' onClick={() => { editData(item.id) }}>
+                                        <lord-icon
+                                            style={{ "width": "25px", "height": "25px", "paddingTop": "6px", "paddingLeft": "5px" }}
+                                            src="https://cdn.lordicon.com/gwlusjdu.json"
+                                            trigger="hover" >
+                                        </lord-icon>
+                                    </td>
+                                    <td className='w-1/3 text-center pr-3 cursor-pointer' onClick={() => { deleteData(item.id) }}>
+                                        <lord-icon
+                                            style={{ "width": "25px", "height": "25px", "paddingTop": "6px", "paddingLeft": "5px" }}
+                                            src="https://cdn.lordicon.com/skkahier.json"
+                                            trigger="hover" >
+                                        </lord-icon>
+                                    </td>
+
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
             </div>
         </>
     )

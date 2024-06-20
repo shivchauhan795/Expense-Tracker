@@ -22,7 +22,7 @@ const AddExpense = () => {
             setFormdata([...formdata, { ...form, id: uuidv4() }])
             localStorage.setItem("expenses", JSON.stringify([...formdata, { ...form, id: uuidv4() }]))
             setForm({ name: '', price: '', category: '' })
-            console.log([...formdata, form])
+            // console.log([...formdata, form])
             toast('Item Saved!!', {
                 position: "bottom-right",
                 autoClose: 2000,
