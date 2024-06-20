@@ -9,6 +9,7 @@ import ShowExpense from './components/ShowExpense.jsx'
 import { ItemsContext } from './context/context'
 
 const Main = () => {
+  const [form, setForm] = useState({ name: '', price: '', category: '' })
   const [formdata, setFormdata] = useState([])
   useEffect(() => {
     let expenses = localStorage.getItem("expenses");
@@ -34,7 +35,7 @@ const Main = () => {
 
   return (
     <React.StrictMode>
-      <ItemsContext.Provider value={{ formdata, setFormdata }}>
+      <ItemsContext.Provider value={{ formdata, setFormdata, form, setForm }}>
         <RouterProvider router={router} />
       </ItemsContext.Provider>
     </React.StrictMode>

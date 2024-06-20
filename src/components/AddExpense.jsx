@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ItemsContext } from '../context/context';
 
 const AddExpense = () => {
-    const [form, setForm] = useState({ name: '', price: '', category: '' })
+    const { form, setForm } = useContext(ItemsContext)
     const { formdata, setFormdata } = useContext(ItemsContext)
     useEffect(() => {
         let expenses = localStorage.getItem("expenses")
@@ -50,7 +50,7 @@ const AddExpense = () => {
     }
     return (
         <>
-            <ItemsContext.Provider value={{ formdata, setFormdata }}>
+            <ItemsContext.Provider value={{ formdata, setFormdata, form, setForm }}>
                 <ToastContainer
                     position="top-right"
                     autoClose={2000}
