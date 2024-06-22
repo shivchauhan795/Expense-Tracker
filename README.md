@@ -22,3 +22,7 @@ for now you can mock the data
 
 ### For Redux
 - `npm install redux react-redux @reduxjs/toolkit`
+
+### Pie Charts
+
+- `npm install --save react-google-charts`

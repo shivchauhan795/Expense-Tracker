@@ -2,6 +2,8 @@ import React, { useEffect, useMemo } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFormdata } from './redux/slices/expenseSlice';
+import { Chart } from "react-google-charts";
+
 
 function App() {
   const formdata = useSelector((state) => state.expenses.formdata);
@@ -30,27 +32,58 @@ function App() {
     }, {});
   }, [formdata]);
 
+  const pieChartData = useMemo(() => {
+    const data = [["Category", "Amount"]];
+    for (const category in categoryExpenses) {
+      data.push([category, categoryExpenses[category]]);
+    }
+    return data;
+  }, [categoryExpenses]);
+
+  const options = {
+    is3D: true,
+    slices: {
+      1: { offset: 0.4 },
+      2: { offset: 0.4 },
+      3: { offset: 0.4 },
+    },
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center h-96 gap-10">
-      <h1 className='text-4xl font-bold'>Welcome to Expense Tracker</h1>
+    <div className="flex flex-col flex-wrap justify-center items-center h-full gap-5 mt-5">
+      <h1 className='text-4xl font-bold text-wrap text-center'>Welcome to Expense Tracker</h1>
       <div className="flex gap-5 items-center">
         <span><strong>Total Expense:</strong></span>
         <div className="totalExpense">
           Rs <input className='p-2 text-center' type="number" disabled value={totalExpense.toFixed(2)} />
         </div>
       </div>
-      <div className="category-expenses">
-        <h2 className='text-2xl font-bold mt-4'>Category-wise Expenses</h2>
-        <ul>
-          {Object.keys(categoryExpenses).map((category) => (
-            <li key={category} className="flex justify-between items-center w-full p-2 gap-5">
-              <span><strong>{category}:</strong></span>
-              <div className="category_wise_expense">
-                Rs <input className='p-2 text-center' type="number" disabled value={categoryExpenses[category].toFixed(2)} />
-              </div>
-            </li>
-          ))}
-        </ul>
+      <div className="flex flex-wrap justify-center items-center gap-16 p-6">
+
+        <div className="category-expenses flex flex-col justify-center items-center gap-10">
+          <h2 className='text-2xl font-bold mt-4 text-center'>Category-wise Expenses</h2>
+          <ul>
+            {Object.keys(categoryExpenses).map((category) => (
+              <li key={category} className="flex flex-wrap justify-between items-center w-full p-2 gap-5">
+                <span><strong>{category}:</strong></span>
+                <div className="category_wise_expense">
+                  Rs <input className='p-2 text-center' type="number" disabled value={categoryExpenses[category].toFixed(2)} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="pieChart">
+          <Chart
+            chartType="PieChart"
+            data={pieChartData}
+            options={options}
+            width={"300px"}
+            height={"300px"}
+          />
+        </div>
+
       </div>
     </div>
   )
