@@ -19,3 +19,6 @@ for now you can mock the data
 - `npm install --save react-toastify`
 - `npm i uuid`
 - `npm i react-router-dom`
+
+### For Redux
+- `npm install redux react-redux @reduxjs/toolkit`
