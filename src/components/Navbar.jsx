@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="flex gap-2 justify-center items-center">
           <img className='size-10' src={favicon} />
           <h2 className='text-2xl uppercase'>
-            Expense Tracker
+            TrackTally
           </h2>
         </div>
       </Link>

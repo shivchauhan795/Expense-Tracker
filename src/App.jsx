@@ -51,7 +51,8 @@ function App() {
 
   return (
     <div className="flex flex-col flex-wrap items-center min-h-[89vh] gap-5 mt-16">
-      <h1 className='text-4xl font-bold text-wrap text-center'>Welcome to Expense Tracker</h1>
+      <h1 className='text-4xl font-bold text-wrap text-center'>Welcome to TrackTally</h1>
+      <p className='font-thin mb-5 -mt-2'>Your Trusted Money Tracking Website</p>
       <div className="flex gap-5 items-center">
         <span><strong>Total Expense:</strong></span>
         <div className="totalExpense">
