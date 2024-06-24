@@ -79,7 +79,7 @@ const ShowExpense = () => {
         transition="Bounce"
       />
       <ToastContainer />
-      <div className='flex flex-col items-center gap-5 p-10'>
+      <div className='flex flex-col flex-wrap items-center gap-5 p-10 min-h-[89vh] w-auto overflow-scroll'>
         <div className="filter">
           <select name="category" id="category" className='border border-black' onChange={handleFilter}>
             <option value="">No Filter</option>

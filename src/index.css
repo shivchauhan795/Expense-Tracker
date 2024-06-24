@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width:650px) {
+    .navbar {
+        width: 100vw;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width:415px) {
+    .addExpense {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

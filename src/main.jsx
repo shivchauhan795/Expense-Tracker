@@ -8,19 +8,20 @@ import AddExpense from './components/AddExpense.jsx';
 import ShowExpense from './components/ShowExpense.jsx';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
+import Footer from './components/Footer.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <><Navbar /><App /></>
+    element: <><Navbar /><App /><Footer/></>
   },
   {
     path: "/add",
-    element: <><Navbar /><AddExpense /></>
+    element: <><Navbar /><AddExpense /><Footer/></>
   },
   {
     path: "/show",
-    element: <><Navbar /><ShowExpense /></>
+    element: <><Navbar /><ShowExpense /><Footer/></>
   },
 ]);
 
