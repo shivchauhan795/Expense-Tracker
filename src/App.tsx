@@ -3,25 +3,32 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFormdata } from './redux/slices/expenseSlice';
 import { Chart } from "react-google-charts";
+import { RootState } from './redux/store';
 
+interface Expense {
+  id: string;
+  name: string;
+  price: string;
+  category: string;
+}
 
 function App() {
-  const formdata = useSelector((state) => state.expenses.formdata);
+  const formdata = useSelector((state: RootState) => state.expenses.formdata);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const dataFromStorage = JSON.parse(localStorage.getItem("expenses"));
-    if (dataFromStorage) {
+    const dataFromStorage = JSON.parse(localStorage.getItem("expenses") || "[]");
+    if (dataFromStorage.length > 0) {
       dispatch(setFormdata(dataFromStorage));
     }
   }, [dispatch]);
 
   const totalExpense = useMemo(() => {
-    return formdata.reduce((total, item) => total + parseFloat(item.price), 0);
+    return formdata.reduce((total: number, item: Expense) => total + parseFloat(item.price), 0);
   }, [formdata]);
 
   const categoryExpenses = useMemo(() => {
-    return formdata.reduce((value, item) => {
+    return formdata.reduce((value: Record<string, number>, item: Expense) => {
       const category = item.category;
       const price = parseFloat(item.price);
       if (!value[category]) {
@@ -34,9 +41,9 @@ function App() {
 
   const pieChartData = useMemo(() => {
     const data = [["Category", "Amount"]];
-    for (const category in categoryExpenses) {
-      data.push([category, categoryExpenses[category]]);
-    }
+    // for (const category in categoryExpenses) {
+    //   data.push([category, categoryExpenses[category]]);
+    // }
     return data;
   }, [categoryExpenses]);
 
@@ -61,7 +68,6 @@ function App() {
       </div>
       {totalExpense > 0 &&
         <div className="flex flex-wrap justify-center items-center gap-16 p-6">
-
           <div className="category-expenses flex flex-col justify-center items-center gap-10">
             <h2 className='text-2xl font-bold mt-4 text-center'>Category-wise Expenses</h2>
             <ul>
@@ -85,7 +91,6 @@ function App() {
               height={"300px"}
             />
           </div>
-
         </div>
       }
       {!totalExpense && <div className='font-thin text-red-400'>No Data to display</div>}
